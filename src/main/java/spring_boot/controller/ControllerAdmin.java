@@ -1,23 +1,15 @@
 package spring_boot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import spring_boot.entity.Role;
 import spring_boot.entity.User;
 import spring_boot.service.RoleServiceImpl;
-import spring_boot.service.SecurityService;
 import spring_boot.service.UserDetailServiceImpl;
-import spring_boot.service.UserService;
-import spring_boot.validator.UserValidator;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,18 +18,6 @@ public class ControllerAdmin {
 
     private final UserDetailServiceImpl userDetailServiceImpl;
     private final RoleServiceImpl roleServiceImpl;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-//    @Autowired
-//    private JdbcUserDetailsManager jdbcUserDetailsManager;
 
     @Autowired
     public ControllerAdmin(UserDetailServiceImpl userDetailServiceImpl, RoleServiceImpl roleServiceImpl) {
@@ -55,7 +35,8 @@ public class ControllerAdmin {
     }
 
     // добавление нового пользователяю, используем 2 метода
-    @Secured("ROLE_ADMIN") //в config добавить @EnableGlobalMethodSecurity(securedEnabled = true) //защищаем отдельные методы
+    @Secured("ROLE_ADMIN")
+    //в config добавить @EnableGlobalMethodSecurity(securedEnabled = true) //защищаем отдельные методы
     @RequestMapping("/addUser")
     public String addNewUser(Model model) {
         System.out.println("addUser/new");
@@ -78,7 +59,7 @@ public class ControllerAdmin {
     public String updateUser(@PathVariable("id") long id, Model model) {
         System.out.println("updateUser/updateUser");
         User user = userDetailServiceImpl.getUserById(id);
-        List<Role> roles = (List<Role>) roleServiceImpl.getAllRoles();
+        List<Role> roles = roleServiceImpl.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("allRoles", roles);
         return "editUser";

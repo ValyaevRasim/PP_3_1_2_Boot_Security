@@ -1,9 +1,6 @@
 package spring_boot.entity;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,28 +58,6 @@ public class User implements UserDetails {
     private boolean enabled;
 
     public User(){}
-//
-//public User(String username, String password, boolean active) {
-//    this.username = username;
-//    this.password = password;
-//    this.active = active;
-//}
-//    public User(String firstname, String lastname, String username, int age, String password) {
-//        this.username = username;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.age = age;
-//        this.password = password;
-//    }
-//
-//    public User(String firstname, String lastname, String username, int age, String password, Boolean enabled) {
-//        this.username = username;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.age = age;
-//        this.password = password;
-//        this.enabled = enabled;
-//    }
 
     public Long getId() {
         return id;
@@ -154,10 +129,6 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     @Override
