@@ -14,7 +14,7 @@
 <h3>СОЗДАНИЕ ПОЛЬЗОВАТЕЛЯ</h3>
 <form th:method="POST" th:action="@{saveUser}" th:object="${user}">
 
-    <label for="username">login</label>
+    <label for="username">email</label>
     <input name="text" th:field="*{username}" id="username" type="text"/>
     <br/>
     <br/>
