@@ -15,15 +15,16 @@
 <h3>СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h3>
 <table border="1">
     <tr>
-        <th>№</th>
-        <th>id</th>
+        <th th:width="50">№</th>
+        <th th:width="50">Id</th>
         <th>логин</th>
         <th>имя</th>
         <th>фамилия</th>
         <th>возраст</th>
         <th>enabled</th>
         <th>roles</th>
-        <th>операции</th>
+        <th>изменение</th>
+        <th>удаление</th>
     </tr>
     <th:block th:each="msg,state : ${userList}">
         <tr>

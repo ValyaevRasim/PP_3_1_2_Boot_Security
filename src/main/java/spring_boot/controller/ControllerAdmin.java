@@ -35,7 +35,7 @@ public class ControllerAdmin {
     }
 
     // добавление нового пользователяю, используем 2 метода
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     //в config добавить @EnableGlobalMethodSecurity(securedEnabled = true) //защищаем отдельные методы
     @RequestMapping("/addUser")
     public String addNewUser(Model model) {
@@ -46,7 +46,7 @@ public class ControllerAdmin {
         return "newUser";
     }
 
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     @PostMapping("/saveUser")
     public String createNewUser(@ModelAttribute("user") User user) {
         System.out.println("createNewUser");
@@ -94,7 +94,8 @@ public class ControllerAdmin {
     @PostMapping("/saveRole")
     public String saveRole(@ModelAttribute("role") Role role) {
         System.out.println("createNewRole");
-        role.setName("ROLE_" + role.getName().toUpperCase());
+//        role.setName("ROLE_" + role.getName().toUpperCase());
+        role.setName(role.getName().toUpperCase());
         roleServiceImpl.saveRole(role);
         return "redirect:/admin/";
     }

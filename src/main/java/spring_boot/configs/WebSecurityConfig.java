@@ -81,22 +81,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для пользователей с ролью Администратор
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-//                .antMatchers(HttpMethod.GET, "/admin/**").hasAnyRole("ADMIN", "USER")
-//                .antMatchers(HttpMethod.DELETE, "/admin/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.PATCH, "/admin/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/","/index").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .successHandler(successUserHandler) //переадресовывает пользователя на соответствующую страницу
-                .and()
-                .logout()
-                .permitAll();
+                    .formLogin().successHandler(successUserHandler) //переадресовывает пользователя на соответствующую страницу
+//                .and()
+//                    .logout().permitAll()
+                ;
     }
 }
