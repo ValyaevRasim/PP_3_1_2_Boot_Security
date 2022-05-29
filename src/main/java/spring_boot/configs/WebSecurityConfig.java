@@ -66,11 +66,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("admin")
 //                .password("admin")
 //                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
+//                .authorities("ADMIN") // в configure(HttpSecurity http) д.б открыт доступ к url .antMatchers("/admin/**").hasAuthority("ADMIN")
+////                .roles("ADMIN")
 //                .and()
 //                .withUser("user")
 //                .password(passwordEncoder().encode("user"))
-//                .roles("USER");
+//                .roles("USER"); // в configure(HttpSecurity http) д.б открыт доступ к url .antMatchers("/user/**").hasRole("USER")
 //
 //    }
 
@@ -82,7 +83,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+//                .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
+//                .antMatchers("/admin/**").hasRole("ADMIN") // в б.д надо чтобы роли начинались на ROLE_
+//                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/","/index").permitAll()
                 //Все остальные страницы требуют аутентификации
